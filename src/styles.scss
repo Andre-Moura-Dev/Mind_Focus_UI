@@ -1,0 +1,106 @@
+/* You can add global styles to this file, and also import other style files */
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  background: #f8f9fa;
+  transition: background 0.3s ease;
+}
+
+/* LIGHT MODE padrão */
+body {
+  background: #f8f9fa;
+  color: #222;
+}
+
+/* DARK MODE */
+body.dark-mode {
+  background: #121212;
+  color: #ffffff;
+}
+
+/* Navbar */
+body.dark-mode .dashboard-navbar {
+  background: #1e1e1e !important;
+  color: white !important;
+  border-color: #333 !important;
+}
+
+/* Cards */
+body.dark-mode .stat-card,
+body.dark-mode .main-card,
+body.dark-mode .p-card {
+  background: #1e1e1e !important;
+  color: white !important;
+  border: 1px solid #333 !important;
+}
+
+/* Textos secundários */
+body.dark-mode .text-muted {
+  color: #bdbdbd !important;
+}
+
+/* PrimeNG Tabs */
+body.dark-mode .p-tabview .p-tabview-nav {
+  background: #1e1e1e !important;
+  border-color: #333 !important;
+}
+
+body.dark-mode .p-tabview .p-tabview-nav li .p-tabview-nav-link {
+  background: #1e1e1e !important;
+  color: #ccc !important;
+  border-color: #333 !important;
+}
+
+body.dark-mode .p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
+  background: #2c2c2c !important;
+  color: #ffffff !important;
+  border-color: #4a4a4a !important;
+}
+
+body.dark-mode .p-tabview .p-tabview-panels {
+  background: #1e1e1e !important;
+  color: white !important;
+}
+
+body.dark-mode .p-tabview .p-tabview-panel {
+  background: #1e1e1e !important;
+  color: white !important;
+}
+
+body.dark-mode .p-card-content,
+body.dark-mode .p-card-body {
+  background: #1e1e1e !important;
+  color: white !important;
+}
+
+/* Inputs */
+body.dark-mode input,
+body.dark-mode textarea,
+body.dark-mode select {
+  background: #2a2a2a !important;
+  color: white !important;
+  border-color: #444 !important;
+}
+
+/* LIGHT */
+.p-sidebar {
+  background: #ffffff !important;
+  color: #222 !important;
+}
+
+/* DARK */
+body.dark-mode .p-sidebar {
+  background: #181818 !important;
+  color: white !important;
+}
+
+/* LINKS */
+body.dark-mode .nav-link {
+  color: white !important;
+}
+
+body.dark-mode .nav-link:hover,
+body.dark-mode .nav-link.active {
+  background: #2c2c2c !important;
+}

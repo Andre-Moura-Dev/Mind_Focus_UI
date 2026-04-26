@@ -1,0 +1,173 @@
+<div class="d-flex dashboard-layout min-vh-100">
+
+  <app-sidebar></app-sidebar>
+
+  <div class="flex-grow-1 dashboard-content">
+
+    <!-- Header -->
+    <nav
+      class="dashboard-navbar d-flex justify-content-between align-items-center px-4 py-3 border-bottom">
+
+      <div>
+        <h4 class="mb-0 fw-bold text-primary">
+          <i class="pi pi-chart-bar me-2"></i>
+          {{ mindFocusDashboard }}
+        </h4>
+
+        <small class="text-muted">
+          Painel Geral do Sistema
+        </small>
+      </div>
+
+      <button
+        pButton
+        type="button"
+        class="p-button-rounded p-button-text"
+        (click)="toggleTheme()"
+        [icon]="themeIcon">
+      </button>
+
+    </nav>
+
+    <!-- Conteúdo -->
+    <div class="container-fluid p-4">
+
+      <!-- Cards -->
+      <div class="row g-4 mb-4">
+
+        <div class="col-md-3">
+          <div class="stat-card">
+            <div class="icon blue">
+              <i class="pi pi-users"></i>
+            </div>
+
+            <div>
+              <small class="text-muted">Usuários</small>
+              <h2 class="mb-1">128</h2>
+              <span class="text-success">+6 esta semana</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="stat-card">
+            <div class="icon green">
+              <i class="pi pi-check-circle"></i>
+            </div>
+
+            <div>
+              <small class="text-muted">Tarefas</small>
+              <h2 class="mb-1">42</h2>
+              <span class="text-warning">12 pendentes</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="stat-card">
+            <div class="icon orange">
+              <i class="pi pi-clock"></i>
+            </div>
+
+            <div>
+              <small class="text-muted">Sessões Foco</small>
+              <h2 class="mb-1">18h</h2>
+              <span class="text-primary">semana</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="stat-card">
+            <div class="icon purple">
+              <i class="pi pi-pencil"></i>
+            </div>
+
+            <div>
+              <small class="text-muted">Despejos</small>
+              <h2 class="mb-1">9</h2>
+              <span class="text-info">hoje</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Tabs -->
+      <p-card styleClass="main-card">
+
+        <p-tabView>
+
+          <!-- Usuários -->
+          <p-tabPanel>
+            <ng-template pTemplate="header">
+              <i class="pi pi-users me-2"></i>
+              <span>Usuários</span>
+            </ng-template>
+
+            <p-card header="Resumo de Usuários">
+              <ul class="list-unstyled mb-0">
+                <li class="mb-2">👥 Total cadastrados: 128</li>
+                <li class="mb-2">🟢 Ativos hoje: 84</li>
+                <li>🆕 Novos esta semana: 6</li>
+              </ul>
+            </p-card>
+
+          </p-tabPanel>
+
+          <!-- Tarefas -->
+          <p-tabPanel>
+            <ng-template pTemplate="header">
+              <i class="pi pi-check-square me-2"></i>
+              <span>Tarefas</span>
+            </ng-template>
+
+            <p-card header="Resumo de Tarefas">
+              <ul class="list-unstyled mb-0">
+                <li class="mb-2">✅ Concluídas hoje: 12</li>
+                <li class="mb-2">📌 Pendentes: 30</li>
+                <li>⚠️ Atrasadas: 4</li>
+              </ul>
+            </p-card>
+
+          </p-tabPanel>
+
+          <!-- Sessões -->
+          <p-tabPanel>
+            <ng-template pTemplate="header">
+              <i class="pi pi-clock me-2"></i>
+              <span>Sessões Foco</span>
+            </ng-template>
+
+            <p-card header="Resumo de Foco">
+              <ul class="list-unstyled mb-0">
+                <li class="mb-2">🕒 Hoje: 2h30</li>
+                <li class="mb-2">📅 Semana: 18h</li>
+                <li>🔥 Média diária: 3h</li>
+              </ul>
+            </p-card>
+
+          </p-tabPanel>
+
+          <!-- Despejos -->
+          <p-tabPanel>
+            <ng-template pTemplate="header">
+              <i class="pi pi-pencil me-2"></i>
+              <span>Despejos</span>
+            </ng-template>
+
+            <p-card header="Despejos Recentes">
+              <ul class="list-unstyled mb-0">
+                <li class="mb-2">💡 Ideia novo app mobile</li>
+                <li class="mb-2">📝 Melhorar cadastro</li>
+                <li>🚀 Automatizar relatórios</li>
+              </ul>
+            </p-card>
+
+          </p-tabPanel>
+
+        </p-tabView>
+      </p-card>
+    </div>
+  </div>
+</div>

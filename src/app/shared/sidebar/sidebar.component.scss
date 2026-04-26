@@ -1,0 +1,37 @@
+:host ::ng-deep {
+    // Remove o padding padrão da sidebar do PrimeNG para o nosso conteúdo preencher tudo
+    .p-sidebar-content {
+        padding: 0 !important;
+    }
+}
+
+.nav-link {
+    border-radius: 12px;
+    transition: all 0.2s ease-in-out;
+    border: 1px solid transparent;
+
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.08);
+        border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    &.active {
+        background-color: #3b82f6 !important; // Cor primária
+        box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        
+        i { color: white; }
+    }
+
+    i {
+        font-size: 1.2rem;
+        width: 25px;
+    }
+}
+
+.hover-effect:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.hover-white:hover {
+    color: white !important;
+}

@@ -1,0 +1,32 @@
+.dashboard-navbar {
+  background: white;
+  color: #222;
+}
+
+// .stat-card,
+// .main-card {
+//   background: white;
+//   color: #222;
+// }
+
+:host ::ng-deep body.dark-mode .dashboard-navbar,
+:host ::ng-deep body.dark-mode .stat-card,
+:host ::ng-deep body.dark-mode .main-card,
+:host ::ng-deep body.dark-mode .p-card {
+  background: #1e1e1e !important;
+  color: white !important;
+}
+
+.stat-card {
+  display: flex;
+  align-items: center;      /* centraliza vertical */
+  justify-content: center;  /* centraliza horizontal */
+  gap: 1rem;
+
+  min-height: 140px;
+  padding: 1.5rem;
+
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.08);
+}

@@ -1,0 +1,68 @@
+<div class="vh-100-dynamic d-flex align-items-center justify-content-center bg-dark p-3">
+
+    <form 
+        [formGroup]="formLogin"
+        (ngSubmit)="fazerLogin()"
+        class="card shadow-lg border-0 bg-secondary bg-opacity-10 text-white" 
+        style="max-width: 100%; max-width: 450px;"
+    >
+
+        <div class="card-body p-4 p-md-5">
+            <div class="text-center mb-4">
+                <i class="pi pi-bolt text-primary" style="font-size: 3.5rem;"></i>
+                <h1 class="fw-bold mt-2">MIND FOCUS</h1>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label small text-white">Usuário:</label>
+                <div class="p-inputgroup">
+                    <span class="p-inputgroup-addon bg-dark border-secondary">
+                        <i class="pi pi-envelope text-primary"></i>
+                    </span>
+                    <input 
+                        type="email"
+                        pInputText
+                        formControlName="email"
+                        class="form-control bg-dark text-white border-secondary"
+                    />
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label small text-white">Senha:</label>
+                <div class="p-inputgroup">
+                    <span class="p-inputgroup-addon bg-dark border-secondary">
+                        <i class="pi pi-lock text-primary"></i>
+                    </span>
+                    <!-- Input com um botão Para Mostrar/Ocultar Senha -->
+                    <input
+                        [type]="showPassword ? 'text' : 'password'"
+                        
+                        pInputText
+                        formControlName="senha"
+                        class="form-control bg-dark text-white border-secondary"
+                    />
+
+                    <button
+                        type="button"
+                        class="btn btn-dark border-secondary"
+                        (click)="mostrarSenha()"
+                    >
+                        <i class="pi" [ngClass]="showEyeIcon ? 'pi-eye-slash' : 'pi-eye'"></i>
+                    </button>
+                    
+                </div>
+            </div>
+
+            <div class="d-grid mt-4">
+                <button
+                    type="submit"
+                    class="btn btn-primary btn-lg"
+                    [disabled]="false"
+                >
+                ENTRAR
+                </button>
+            </div>
+        </div>    
+    </form>
+</div>

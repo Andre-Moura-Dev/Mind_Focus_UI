@@ -1,0 +1,63 @@
+<div class="p-3 position-relative" style="z-index: 999;" *ngIf="!sidebarVisible">
+    <p-button
+    type=""
+    (onClick)="sidebarVisible = true"
+    icon="pi pi-bars" 
+    label="MIND FOCUS" 
+    styleClass="p-button-rounded p-button-info shadow"
+    ></p-button>
+</div>
+
+<p-sidebar 
+    #sidebarRef 
+    [(visible)]="sidebarVisible"
+    [showCloseIcon]="false"
+    [dismissible]="true"
+>
+    <ng-template pTemplate="headless">
+        <div class="flex flex-column h-full bg-dark text-white" style="width: 280px; height: 100vh; overflow: hidden;">
+
+            <div class="d-flex align-items-center justify-content-between px-4 pt-4 pb-2 flex-shrink-0">
+                <span class="d-inline-flex align-items-center gap-2">
+                    <i class="pi pi-bolt text-primary" style="font-size: 1.8rem;"></i>
+                    <span
+                        (click)="irParaHome($event)"
+                        class="fw-bold fs-4 m-0 text-uppercase tracking-wider"
+                        style="cursor: pointer;"
+                    >Mind Focus</span>
+                </span>
+            </div>
+
+            <hr class="mx-3 border-secondary op-25"/>
+
+            <div class="overflow-y-auto px-3 mt-2">
+                <ul class="nav nav-pills flex-column gap-2">
+                    <li class="nav-item">
+                        <a [routerLink]="['/usuarios']" (click)="sidebarVisible = false" routerLinkActive="active" class="nav-link text-white d-flex align-items-center gap-3 py-3">
+                            <i class="pi pi-users"></i>
+                            <span class="fw-medium">Usuários</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a [routerLink]="['/tarefas']" (click)="sidebarVisible = false" routerLinkActive="active" class="nav-link text-white d-flex align-items-center gap-3 py-3">
+                            <i class="pi pi-check-square"></i>
+                            <span class="fw-medium">Tarefas</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a [routerLink]="['/sessoes-foco']" (click)="sidebarVisible = false" routerLinkActive="active" class="nav-link text-white d-flex align-items-center gap-3 py-3">
+                            <i class="pi pi-clock"></i>
+                            <span class="fw-medium">Sessões Foco</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a [routerLink]="['/despejos-cerebrais']" (click)="sidebarVisible = false" routerLinkActive="active" class="nav-link text-white d-flex align-items-center gap-3 py-3">
+                            <i class="pi pi-clone"></i>
+                            <span class="fw-medium">Despejos Cerebrais</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </ng-template>
+</p-sidebar>
