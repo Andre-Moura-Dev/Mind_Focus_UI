@@ -1,1 +1,170 @@
-<p>editar-usuario-form works!</p>
+<div class="d-flex dashboard-layout min-vh-100">
+
+    <app-sidebar></app-sidebar>
+
+    <div class="flex-grow-1 dashboard-content">
+
+        <nav class="dashboard-navbar d-flex justify-content-end align-items-center px-4 py-3 border-bottom">
+            <button
+                pButton
+                type="button"
+                class="p-button-rounded p-button-text"
+                (click)="toggleTheme()"
+                [icon]="themeIcon"
+            >
+            </button>
+
+            <div class="d-flex align-items-center gap-3">
+
+                <div class="d-flex align-items-center gap-2">
+                    <i class="pi pi-user text-primary"></i>
+
+                    <span class="fw-semibold">
+                        Olá, {{ nomeUsuarioLogado }}
+                    </span>
+                </div>
+
+                <div class="token-session-container d-flex align-items-center px-3 py-1.5 rounded bg-light border">
+                    <i class="pi pi-clock text-warning me-2" [pTooltip]="'Tempo restante da sessão:'"></i>
+                    <span class="fw-semibold text-muted me-2" style="font-size: 0.9rem;">
+                        {{ _remainingTimeToken }}
+                    </span>
+                    <button
+                        pButton
+                        type="button"
+                        icon="pi pi-refresh"
+                        class="p-button-rounded p-button-text p-button-sm p-button-secondary"
+                        [pTooltip]="'Renovar sessão'"
+                        tooltipPosition="bottom"
+                        (click)="refreshSession()"
+                    ></button>
+                </div>
+
+            </div>
+        </nav>
+
+        <div class="container-fluid d-flex align-items-center justify-content-center p-4" style="min-height: calc(100vh - 85px);">
+
+            <form 
+                [formGroup]="formEditarUsuarios" 
+                (ngSubmit)="putEditarUsuario(idUsuario)" 
+                class="card shadow-lg border-0 bg-secondary bg-opacity-10 text-white w-100" 
+                style="max-width: 600px;"
+            >
+
+                <div class="card-body p-4 p-md-5">
+
+                    <div class="text-center mb-4">
+                        <i class="pi pi-user-edit text-primary" style="font-size: 3.5rem;"></i>
+                        <h1 class="fw-bold mt-2">Editar Usuário</h1>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label small text-white">Nome Usuário:</label>
+                        <div class="p-inputgroup">
+                            <span class="p-inputgroup-addon bg-dark border-secondary">
+                                <i class="pi pi-user text-primary"></i>
+                            </span>
+                            <input 
+                                type="text"
+                                pInputText
+                                formControlName="nome"
+                                placeholder="Informe o seu nome"
+                                class="form-control bg-dark text-white border-seconddary"
+                            />
+                        </div>
+                        <small 
+                            class="text-danger d-block mt-1" 
+                            *ngIf="formEditarUsuarios.get('nome')?.invalid && formEditarUsuarios.get('nome')?.touched"
+                        >
+                            Nome é obrigatório
+                        </small>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label small text-white">E-mail Usuário:</label>
+                        <div class="p-inputgroup">
+                            <span class="p-inputgroup-addon bg-dark border-secondary">
+                                <i class="pi pi-envelope text-primary"></i>
+                            </span>
+                            <input 
+                                type="email"
+                                pInputText
+                                formControlName="email"
+                                placeholder="Informe o seu email"
+                                class="form-control bg-dark text-white border-seconddary"
+                            />
+                        </div>
+                        <small 
+                            class="text-danger d-block mt-1" 
+                            *ngIf="formEditarUsuarios.get('email')?.errors?.['required'] && formEditarUsuarios.get('email')?.touched"
+                        >
+                            E-mail é Obrigatório.
+                        </small>
+                        <small 
+                            class="text-danger d-block mt-1" 
+                            *ngIf="formEditarUsuarios.get('email')?.errors?.['email'] && formEditarUsuarios.get('email')?.touched"
+                        >
+                            E-mail inválido.
+                        </small>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label small text-white">Senha Usuário:</label>
+                        <div class="p-inputgroup">
+                            <span class="p-inputgroup-addon bg-dark border-secondary">
+                                <i class="pi pi-lock text-primary"></i>
+                            </span>
+                            <input 
+                                [type]="showPassword ? 'text' : 'password'"
+                                pInputText
+                                formControlName="senha"
+                                placeholder="Mínimo 8 caracteres"
+                                class="form-control bg-dark text-white border-secondary"
+                            />
+                            <button
+                                type="button"
+                                class="btn btn-dark border-secondary"
+                                (click)="mostrarSenha()"
+                            >
+                                <i class="pi" [ngClass]="showEyeIcon ? 'pi-eye-slash' : 'pi-eye'" ></i>
+                            </button>
+                        </div>
+                        <small 
+                            class="text-danger d-block mt-1" 
+                            *ngIf="formEditarUsuarios.get('senha')?.errors?.['required'] && formEditarUsuarios.get('senha')?.touched"
+                        >
+                            Senha é obrigatória.
+                        </small>
+                        <small 
+                            class="text-danger d-block mt-1" 
+                            *ngIf="formEditarUsuarios.get('senha')?.errors?.['minlength'] && formEditarUsuarios.get('senha')?.touched"
+                        >
+                            Mínimo de 8 caracteres.
+                        </small>
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col-6 d-grid">
+                            <button 
+                                type="button" 
+                                class="btn btn-outline-secondary border-secondary text-white" 
+                                (click)="voltar()"
+                            >
+                                Voltar
+                            </button>
+                        </div>
+                        <div class="col-6 d-grid">
+                            <button
+                                type="submit"
+                                class="btn btn-primary"
+                                [disabled]="formEditarUsuarios.invalid"
+                            >
+                                Editar
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

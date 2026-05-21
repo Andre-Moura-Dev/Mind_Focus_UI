@@ -1,37 +1,48 @@
 import { Injectable } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { AbstractService } from './abstract.service';
+import { RestApiService } from './rest-api.service';
+import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserServiceService {
+export class UserServiceService extends AbstractService<object> {
 
-  constructor(http: HttpClientModule) { 
-    
+  public override api: string;
+
+  constructor(http: RestApiService) {
+    super(http);
+    this.api = `${environment.apiUrl}/usuario`;
   }
 
-  public getListarUsuario() {
-
+  public getAll(): Observable<any> {
+    const url = this.api + '/listar';
+    return this.http.sendGet(url);
   }
 
-  public postCadastrarUsuario(dto: any) {
-
+  public postUsuarios(dto: any): Observable<any> {
+    const url = this.api + '/cadastrar';
+    return this.http.sendPost(url, dto);
   }
 
-  public putAtualizarUsuario(id: any) {
-
+  public putUsuarios(id: number, dto: any): Observable<any> {
+    const url = this.api + `/atualizar/${id}`;
+    return this.http.sendPut(url, dto);
   }
 
-  public deleteUsuario(id: any) {
-
+  public deleteUsuarios(id: number): Observable<any> {
+    const url = this.api + `/deletar/${id}`;
+    return this.http.sendDelete(url);
   }
 
-  public buscarUsuarioEmail(email: string) {
-
+  public getUsuarioEmail(email: string): Observable<any> {
+    const url = this.api + `/buscar-por-email/${email}`;
+    return this.http.sendGet(url);
   }
 
-  public buscarUsuarioId(id: number) {
-
+  public getPorId(id: number): Observable<any> {
+    const url = this.api + `/buscar-por-id/${id}`;
+    return this.http.sendGet(url);
   }
 }

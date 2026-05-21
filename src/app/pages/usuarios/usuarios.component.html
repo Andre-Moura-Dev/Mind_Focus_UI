@@ -1,83 +1,156 @@
-<p-card header="Listagem Usuários" class="text-center">
+<div class="d-flex dashboard-layout min-vh-100">
 
-    <div class="d-flex justify-content-end mb-3">
-        <button
-            pButton
-            type="button"
-            class="p-button-rounded p-button-text"
-            (click)="toggleTheme()"
-            [icon]="themeIcon"
-        ></button>
-    </div>
+    <app-sidebar></app-sidebar>
 
-    <div class="d-flex justify-content-between align-items-center mb-4 gap-3">
-        <div class="p-inputgroup" style="max-width: 400px;">
-            <span class="p-inputgroup-addon bg-dark border-secondary">
-                <i class="pi pi-search text-primary"></i>
-            </span>
-            <input 
-                type="text"
-                pInputText
-                [(ngModel)]="filtro"
-                placeholder="Procurar..."
-                class="bg-dark text-white border-secondary"
-            />
+    <div class="flex-grow-1 dashboard-content">
+
+        <nav
+            class="dashboard-navbar d-flex justify-content-end align-items-center px-4 py-3 border-bottom">
 
             <button
                 pButton
                 type="button"
-                icon="pi pi-user-plus"
-                label="Cadastrar"
-                class="p-button-success"
-                (click)="cadastrarUsuario()"
-            >
+                class="p-button-rounded p-button-text"
+                (click)="toggleTheme()"
+                [icon]="themeIcon">
             </button>
+
+            <div class="d-flex align-items-center gap-3">
+
+                <div class="d-flex align-items-center gap-2">
+                    <i class="pi pi-user text-primary"></i>
+
+                    <span class="fw-semibold">
+                        Olá, {{ nomeUsuarioLogado }}
+                    </span>
+
+                </div>
+
+                <div class="token-session-container d-flex align-items-center px-3 py-1.5 rounded bg-light border">
+                    <i class="pi pi-clock text-warning me-2" [pTooltip]="'Tempo restante da sessão:'"></i>
+                    <span class="fw-semibold text-muted me-2" style="font-size: 0.9rem;">
+                        {{ _remainingTimeToken }}
+                    </span>
+                    <button
+                        pButton
+                        type="button"
+                        icon="pi pi-refresh"
+                        class="p-button-rounded p-button-text p-button-sm p-button-secondary"
+                        [pTooltip]="'Renovar sessão'"
+                        tooltipPosition="bottom"
+                        (click)="refreshSession()"
+                    ></button>
+                </div>
+
+            </div>
+
+        </nav>
+
+        <div class="container-fluid p-4">
+
+            <p-card header="Listagem Usuários" class="text-center">
+
+                <div class="d-flex justify-content-between align-items-center mb-4 gap-3">
+                    <div class="p-inputgroup" style="max-width: 400px;">
+
+                        <span class="p-inputgroup-addon bg-dark border-secondary">
+                            <i class="pi pi-search text-primary"></i>
+                        </span>
+
+                        <input
+                            type="text"
+                            pInputText
+                            [(ngModel)]="filtro"
+                            placeholder="Procurar..."
+                            class="bg-dark text-white border-secondary"
+                            (input)="users.filterGlobal(filtro, 'contains')"
+                        />
+
+                        <button
+                            pButton
+                            type="button"
+                            icon="pi pi-user-plus"
+                            label="Cadastrar"
+                            class="p-button-success"
+                            (click)="cadastrarUsuario()">
+                        </button>
+
+                    </div>
+                </div>
+
+                <p-table
+                    #users
+                    [value]="usuarios"
+                    [rows]="50"
+                    [paginator]="true"
+                    [globalFilterFields]="[
+                        'idUsuario',
+                        'nome',
+                        'email'
+                    ]"
+                    [rows]="50"
+                    currentPageReportTemplate="Monstrando {first} de {last} de {totalRecords}"
+                    [rowsPerPageOptions]="[50, 100, 150]"
+                    [sortField]="'idUsuario'"
+                    [sortOrder]="-1"
+                    [showCurrentPageReport]="true"
+                    responsiveLayout="scroll"
+                    styleClass="p-datatable-gridlines">
+
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th style="width: 150px;" class="text-center">Ações</th>
+                            <th pSortableColumn="id">
+                                Código
+                                <p-sortIcon field="id"></p-sortIcon>
+                            </th>
+
+                            <th pSortableColumn="nome">
+                                Nome
+                                <p-sortIcon field="nome"></p-sortIcon>
+                            </th>
+
+                            <th pSortableColumn="email">
+                                E-mail
+                                <p-sortIcon field="email"></p-sortIcon>
+                            </th>
+                        </tr>
+                    </ng-template>
+
+                    <ng-template pTemplate="body" let-user>
+                        <tr>
+
+                            <td class="text-center">
+                                <div class="d-flex justify-content-center gap-2">
+
+                                    <button
+                                        pButton
+                                        icon="pi pi-pencil"
+                                        class="p-button-rounded p-button-info p-button-text"
+                                        (click)="editarUsuario(user.idUsuario)"
+                                        pTooltip="Editar">
+                                    </button>
+
+                                    <button
+                                        pButton
+                                        icon="pi pi-trash"
+                                        class="p-button-rounded p-button-danger p-button-text"
+                                        (click)="deletarUsuario(user.idUsuario, $event)"
+                                        pTooltip="Excluir">
+                                    </button>
+
+                                </div>
+                            </td>
+
+                            <td class="text-center">{{ user.idUsuario }}</td>
+                            <td class="text-center">{{ user.nome }}</td>
+                            <td class="text-center">{{ user.email }}</td>
+
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </p-card>
+            <p-confirmDialog></p-confirmDialog>
         </div>
     </div>
-
-    <p-table
-        #dt
-        [value]="listaUsuariosMockados" 
-        [rows]="50" 
-        [paginator]="true"
-        responsiveLayout="scroll"
-        styleClass="p-datatable-sm"
-    >
-        <ng-template pTemplate="header">
-            <tr>
-                <th style="width: 150px;" class="text-center">Ações</th>
-                <th pSortableColumn="id">Código <p-sortIcon field="id"></p-sortIcon></th>
-                <th pSortableColumn="nome">Nome <p-sortIcon field="nome"></p-sortIcon></th>
-                <th pSortableColumn="email">E-mail <p-sortIcon field="email"></p-sortIcon></th>
-            </tr>
-        </ng-template>
-
-        <ng-template pTemplate="body" let-user>
-            <tr>
-                <td class="text-center">
-                    <div class="d-flex justify-content-center gap-2">
-                        <button
-                            pButton
-                            icon="pi pi-pencil"
-                            class="p-button-rounded p-button-info p-button-text"
-                            (click)="editarUsuario(user.idUsuario)"
-                            pTooltip="Editar"
-                        ></button>
-                        <button
-                            pButton
-                            icon="pi pi-trash"
-                            class="p-button-rounded p-button-danger p-button-text"
-                            (click)="excluirUsuario(user)"
-                            pTooltip="Excluir"
-                        ></button>
-                    </div>
-                </td>
-
-                <td class="text-center"> {{ user.idUsuario }} </td>
-                <td class="text-center"> {{ user.nome }} </td>
-                <td class="text-center"> {{ user.email }} </td>
-
-            </tr>
-        </ng-template>
-    </p-table>
-</p-card>
+</div>

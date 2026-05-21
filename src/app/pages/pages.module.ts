@@ -17,6 +17,7 @@ import { ButtonModule } from 'primeng/button';
 import { ToastModule } from 'primeng/toast';
 import { TableModule } from 'primeng/table';
 import { InputTextModule } from 'primeng/inputtext';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { CadastrarUsuarioFormComponent } from './usuarios/cadastrar-usuario-form/cadastrar-usuario-form.component';
 import { EditarUsuarioFormComponent } from './usuarios/editar-usuario-form/editar-usuario-form.component';
 import { TooltipModule } from "primeng/tooltip";
@@ -46,6 +47,7 @@ import { TooltipModule } from "primeng/tooltip";
     ToastModule,
     TableModule,
     InputTextModule,
+    ConfirmDialogModule,
     TooltipModule
 ]
 })

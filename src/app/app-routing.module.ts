@@ -19,24 +19,36 @@ const routes: Routes = [
     path: 'login', component: LoginComponent
   },
   {
-    path: 'home', component: HomeComponent,
+    path: 'home', component: HomeComponent, canActivate: [AuthGuard]
   },
   {
-    path: 'usuarios', component: UsuariosComponent,
+    path: 'usuarios',
+    canActivate: [AuthGuard],
     children: [
-      { path: '', component: UsuariosComponent },
-      { path: 'cadastrar-usuario-form', component: CadastrarUsuarioFormComponent },
-      { path: 'editar-usuario-form', component: EditarUsuarioFormComponent },
+      {
+        path: '',
+        component: UsuariosComponent
+      },
+      {
+        path: 'cadastrar-usuario-form',
+        component: CadastrarUsuarioFormComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'editar-usuario-form',
+        component: EditarUsuarioFormComponent,
+        canActivate: [AuthGuard]
+      }
     ]
   },
   {
-    path: 'tarefas', component: TarefasComponent
+    path: 'tarefas', component: TarefasComponent, canActivate: [AuthGuard]
   },
   {
-    path: 'sessoes-foco', component: SessoesFocoComponent
+    path: 'sessoes-foco', component: SessoesFocoComponent, canActivate: [AuthGuard]
   },
   {
-    path: 'despejos-cerebrais', component: DespejosCerebraisComponent
+    path: 'despejos-cerebrais', component: DespejosCerebraisComponent, canActivate: [AuthGuard]
   },
   {
     path: '**', redirectTo: 'login'

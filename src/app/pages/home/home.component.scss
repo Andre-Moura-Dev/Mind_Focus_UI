@@ -1,32 +1,45 @@
+@import '../../../styles.scss';
+
 .dashboard-navbar {
-  background: white;
-  color: #222;
+  background-color: var(--bg-surface);
+  border-bottom: 1px solid var(--border-color) !important;
 }
 
-// .stat-card,
-// .main-card {
-//   background: white;
-//   color: #222;
-// }
-
-:host ::ng-deep body.dark-mode .dashboard-navbar,
-:host ::ng-deep body.dark-mode .stat-card,
-:host ::ng-deep body.dark-mode .main-card,
-:host ::ng-deep body.dark-mode .p-card {
-  background: #1e1e1e !important;
-  color: white !important;
-}
-
-.stat-card {
+.start-card {
   display: flex;
-  align-items: center;      /* centraliza vertical */
-  justify-content: center;  /* centraliza horizontal */
-  gap: 1rem;
-
-  min-height: 140px;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1.25rem;
+  min-height: 110px;
   padding: 1.5rem;
-
-  background: white;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,.08);
+  box-shadow: var(--card-shadow);
+
+  .icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+
+    &.blue { background: rgba($primary, 0.1); color: $primary; }
+    &.green { background: rgba($success, 0.1); color: $success; }
+    &.orange { background: rgba($warning, 0.1); color: $warning; }
+    &.purple { background: rgba($info, 0.1); color: $info; }
+  }
+
+  h2 {
+    color: var(--text-main);
+    font-weight: 700;
+  }
+}
+
+.token-session-container {
+  background-color: var(--bg-system) !important;
+  border-color: var(--border-color) !important;
+  color: var(--text-main);
 }

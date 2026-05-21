@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { AppComponent } from '../../app.component';
+import { AuthService } from '../../services/auth/auth.service';
+import { TokenRenewalService } from '../../services/auth/token-renewal.service';
 
 @Component({
   selector: 'app-login',
@@ -13,11 +16,6 @@ export class LoginComponent implements OnInit {
   public showPassword: boolean = false;
   public showEyeIcon: boolean = false;
 
-  mockedData = {
-    email: 'teste@testeemail.com',
-    senha: '12345678'
-  }
-
   formLogin = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     senha: new FormControl('', [Validators.required, Validators.minLength(8)])
@@ -27,28 +25,49 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private toastr: ToastrService,
+    private authService: AuthService,
+    private tokenRenewalService: TokenRenewalService,
+    private appComponent: AppComponent
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (this.authService.checarAutenticacao()) {
+      this.router.navigate(['/home']);
+    }
+  }
 
   fazerLogin() {
     if (this.formLogin.valid) {
       const { email, senha } = this.formLogin.value;
 
-      if (
-        email === this.mockedData.email && 
-        senha === this.mockedData.senha
-      ) {
+      if (email && senha) {
+        this.appComponent.loadingSpinner = true;
 
-        this.toastr.success("Login realizado com sucesso!");
-        this.router.navigate(['/home']);
+        this.authService.login({ email, senha }).subscribe({
+          next: (res) => {
+            this.appComponent.loadingSpinner = false;
+            this.tokenRenewalService.startTokenRenewal();
+            this.toastr.success("Login realizado com sucesso!");
+            this.router.navigate(['/home']);
+          },
+          error: (err) => {
+            this.appComponent.loadingSpinner = false;
 
-      } else {  
+            if (err.status === 401 || err.status === 403) {
+              this.toastr.error("E-mail ou senha incorretos!");
+            } else if (err.status === 0) {
+              this.toastr.error("Não foi possível conectar ao servidor.");
+            } else {
+              this.toastr.error("Ocorreu um erro inesperado ao realizar o login.");
+            }
+          }
+        });
+      } else {
         this.toastr.error("Credenciais Inválidas!");
       }
 
     } else {
-      this.toastr.warning("Preencha todos os campos!");
+      this.toastr.warning("Por favor, Preencha todos os campos corretamente!");
     }
   }
 

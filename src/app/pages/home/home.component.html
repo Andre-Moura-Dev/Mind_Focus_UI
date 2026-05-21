@@ -19,6 +19,35 @@
         </small>
       </div>
 
+      <div class="d-flex align-items-center gap-3">
+
+        <div class="d-flex align-items-center gap-2">
+          <i class="pi pi-user text-primary"></i>
+
+          <span class="fw-semibold">
+            Olá, {{ nomeUsuarioLogado }}
+          </span>
+
+        </div>
+
+        <div class="token-session-container d-flex align-items-center px-3 py-1.5 rounded bg-light border">
+          <i class="pi pi-clock text-warning me-2" [pTooltip]="'Tempo restante da sessão:'"></i>
+          <span class="fw-semibold text-muted me-2" style="font-size: 0.9rem;">
+            {{ _remainingTimeToken }}
+          </span>
+          <button
+            pButton
+            type="button"
+            icon="pi pi-refresh"
+            class="p-button-rounded p-button-text p-button-sm p-button-secondary"
+            [pTooltip]="'Renovar sessão'"
+            tooltipPosition="bottom"
+            (click)="refreshSession()"
+          ></button>
+        </div>
+
+      </div>
+
       <button
         pButton
         type="button"
