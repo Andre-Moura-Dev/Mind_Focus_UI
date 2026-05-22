@@ -1,27 +1,83 @@
-# MindFocusUi
+# MindFocusUi 🧠
+Projeto desenvolvido com Angular 17 focado em produtividade, organização e foco. A aplicação foi criada para ajudar a gerenciar tarefas, melhorar a concentração e acompanhar aatividades do dia a dia através de uma interface moderna e responsiva.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.17.
+## 🚀 Tecnologias Utilizadas 
+. Angular 17.3.17
+. Typescript
+. HTML5
+. SCSS
+. Angular CLI
 
-## Development server
+## 📁 Estrutura do Projeto 
+src/
+ ├── app/
+ │   ├── components/
+ │   ├── pages/
+ │   ├── services/
+ │   ├── models/
+ │   ├── utils/
+ │   ├── guards/
+ │   └── shared/
+ │
+ ├── assets/
+ ├── environments/
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Pré-requisitos
+Antes de iniciar o projeto, você precisa ter instalado:
+. Node.js
+. Angular CLI
 
-## Code scaffolding
+Verifique as versões:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### 1. Versão do Node.js
+```bash
+node - v
+```
 
-## Build
+### 2. Versão do Angular CLI
+```bash
+ng version
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## 📦 Instalação
 
-## Running unit tests
+1. Clone o repositório
+```bash
+git clone URL_DO_REPOSITORIO
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+2. Entre na pasta do projeto:
+```bash
+cd MindFocusUi
+```
 
-## Running end-to-end tests
+3. Instale as dependências:
+```bash
+npm install
+```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Como Rodar o Projeto
 
-## Further help
+1. Inicie o servidor de desenvolvimento:
+```bash
+ng serve
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+2. A aplicação ficará disponível em:
+```bash
+http://localhost:4021/
+```
+
+## 🛠️ Gerando Componentes
+
+1. Criar um novo componente:
+```bash
+ng g component pages/usuarios/listar-usuarios --module pages.module
+```
+
+## 🔧 Gerando Services
+
+2. Criar uma nova service:
+```bash
+ng generate service services/nome-do-servico
+```
